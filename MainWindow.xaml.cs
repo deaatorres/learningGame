@@ -49,7 +49,8 @@ namespace WpfApplication1
                 this.currentQuestion = this.GetRandomQuestion(availableQuestions);
                 this.QuestionPrompt.Text = this.currentQuestion.QuestionText;
 
-                MessageBox.Show("You got it right!!");
+                MessageBox.Show("You got it right!!"); 
+                AnswerBox.Clear();
             }
             else
             {
@@ -59,7 +60,7 @@ namespace WpfApplication1
 
         private Question GetRandomQuestion(IEnumerable<Question> questions)
         {
-            return questions.ElementAt(random.Next(0, this.questions.Count));
+            return questions.ElementAt(random.Next(0, questions.Count()));
         }
     }
 }
