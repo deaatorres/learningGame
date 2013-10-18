@@ -20,7 +20,7 @@
                 TextWrapping="Wrap" 
                 HorizontalAlignment="Center" />
             <Label Content="Put your answer in here" HorizontalAlignment="Center" />
-            <TextBox />
+            <TextBox x:Name="AnswerBox" />
         </StackPanel>
     </DockPanel>
 </Window>

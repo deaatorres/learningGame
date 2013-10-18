@@ -42,7 +42,11 @@ namespace WpfApplication1
 
         private void CheckAnswerButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button was clicked");
+            var enteredText = AnswerBox.Text;
+            if (currentQuestion.Answer == enteredText)
+                MessageBox.Show("You got it right!!");
+            else
+                MessageBox.Show("Sorry, you are incorrect :(");
         }
 
         
