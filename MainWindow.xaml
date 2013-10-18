@@ -9,7 +9,7 @@
             DockPanel.Dock="Bottom" 
             Orientation="Horizontal" 
             FlowDirection="RightToLeft" 
-            Margin="16,0,16,0">
+            Margin="16">
             <Button x:Name="CheckAnswerButton" Content="Check Answer"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="16,0,16,0">
