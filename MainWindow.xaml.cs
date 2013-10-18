@@ -33,7 +33,7 @@ namespace WpfApplication1
             questions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Question>>(File.ReadAllText(questionsPath));
             this.random = new Random();
 
-            this.currentQuestion = questions.ElementAt(random.Next(0, this.questions.Count));
+            this.currentQuestion = this.GetRandomQuestion(this.questions);
 
             if(this.currentQuestion != null) {
                 this.QuestionPrompt.Text = this.currentQuestion.QuestionText;
@@ -44,11 +44,22 @@ namespace WpfApplication1
         {
             var enteredText = AnswerBox.Text;
             if (currentQuestion.Answer == enteredText)
+            {
+                var availableQuestions = this.questions.Where(question => question != this.currentQuestion);
+                this.currentQuestion = this.GetRandomQuestion(availableQuestions);
+                this.QuestionPrompt.Text = this.currentQuestion.QuestionText;
+
                 MessageBox.Show("You got it right!!");
+            }
             else
+            {
                 MessageBox.Show("Sorry, you are incorrect :(");
+            }
         }
 
-        
+        private Question GetRandomQuestion(IEnumerable<Question> questions)
+        {
+            return questions.ElementAt(random.Next(0, this.questions.Count));
+        }
     }
 }
