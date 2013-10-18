@@ -27,7 +27,14 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
-            CheckAnswerButton.Click += CheckAnswerButton_Click;
+            CheckAnswerButton.Click += (o, e) => CheckAnswer();
+            AnswerBox.KeyDown += (o, e) =>
+            {
+                if (e.Key == Key.Enter)
+                {
+                    CheckAnswer();
+                }
+            };
 
             var questionsPath = ConfigurationManager.AppSettings["questionsPath"];
             questions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Question>>(File.ReadAllText(questionsPath));
@@ -40,7 +47,7 @@ namespace WpfApplication1
             }
         }
 
-        private void CheckAnswerButton_Click(object sender, RoutedEventArgs e)
+        private void CheckAnswer()
         {
             var enteredText = AnswerBox.Text;
             if (currentQuestion.Answer == enteredText)
@@ -49,12 +56,13 @@ namespace WpfApplication1
                 this.currentQuestion = this.GetRandomQuestion(availableQuestions);
                 this.QuestionPrompt.Text = this.currentQuestion.QuestionText;
 
-                MessageBox.Show("You got it right!!"); 
+                MessageBox.Show("You got it right!!");
                 AnswerBox.Clear();
             }
             else
             {
                 MessageBox.Show("Sorry, you are incorrect :(");
+                AnswerBox.Clear();
             }
         }
 
